@@ -1,0 +1,17 @@
+include ../../../../base/partials/form_helpers
+
+.row
+  .col-xs-1
+    i.handle.fa.fa-fw.fa-bars(style='cursor:pointer;')
+    //- TODO - should be data attribute
+
+  .col-xs-3
+    +formInput({ formGroupCss: 'm-b-0', name: 'enabled', type: 'checkbox', value: enabled })
+
+  .col-xs-4= label
+  .col-xs-4= id
+
+  //- .col-xs-6= id
+  //- .col-xs-12= label
+  //- .col-xs-12= tooltip
+  //- .col-xs-12= prefix

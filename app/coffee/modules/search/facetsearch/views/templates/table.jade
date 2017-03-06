@@ -1,0 +1,50 @@
+
+//- Mixins
+mixin attrRow(attr)
+  if data[attr]
+    tr
+      td #{attr}:
+      td #{data[attr]}
+
+mixin idRow(attr)
+  if data[attr]
+    tr
+      td #{attr}:
+      td
+        a(data-relation=data[attr]['@id']) #{data[attr]['@id']}
+
+//- Outputs attributes using mixins
++attrRow('@id')
++attrRow('@type')
++attrRow('rdfs:Label')
++attrRow('dmoa:FileType')
++attrRow('dmoi:resultType')
++idRow('dmo:isResultOf')
++idRow('dmo:belongsTo')
+
+
+if data.hasAggregates
+  tr
+    td aggregates:
+    td
+      a(data-click='toggle-aggegates') Show Aggregates
+      | &nbsp; (#{data.aggregates.length} items)
+
+  tr.aggregate-list(data-toggle='aggregates' style='display:none;')
+    td
+    td
+      each file in data.aggregates
+        a(data-aggregates=file)= file
+        | , &nbsp;
+
+//- label:  DATA
+//- type: Thing
+//- URI:  http://dmo.org/insta ... ds/10_DOE_IV_R4/DATA
+//- arkType:  Directory
+//- oreType:  Aggregation
+//- hasFilesNum:  4
+//- isSubDirectoryOf: 10_DOE_IV_R4
+//- aggregates: http://dmo.org/instance/Mock_Dvds/10_DOE_IV_R4/DATA/calculated.xls, 01-01-1-PRE.csv, 01-01-1-TEST.csv, measured.xls
+//- Label:  DATA
+//- hasFile:  measured.xls, 01-01-1-PRE.csv, http://dmo.org/instance/Mock_Dvds/10_DOE_IV_R4/DATA/calculated.xls, 01-01-1-TEST.csv
+//- dmoType:  Result

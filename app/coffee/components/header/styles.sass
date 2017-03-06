@@ -1,0 +1,44 @@
+// HEADER
+.navbar-brand
+
+  &.title
+    letter-spacing: .25rem
+
+  small
+    margin-left: .5rem
+    letter-spacing:
+
+  // Header Circle Button - clean up
+  &.btn-circle
+
+    $btnDimension: 2.4rem !important
+    $btnIconDimension: 1.6rem !important
+
+    +z-depth-1
+    width: $btnDimension
+    height: $btnDimension
+    border-radius: $btnDimension
+    padding: 0
+    padding-top: .1rem
+    transition: box-shadow .25s ease-in-out
+    color: #000
+
+    .icon
+      background-image: url('../img/logo.png')
+      background-repeat: no-repeat
+      background-position: center
+      margin-left: .35rem
+      margin-top: .25rem
+      margin-right: 0
+      margin-bottom: 0
+
+      width: $btnIconDimension
+      height: $btnIconDimension
+      background-size: $btnIconDimension
+      padding: 0 !important // TODO - ditch !important
+      // margin: 0 !important
+
+    &:hover
+      +z-depth-2
+      background-color: #fff
+      color: #000

@@ -1,0 +1,184 @@
+
+.nav.nav-tabs
+  .nav-link
+    padding: 0.25rem 0.5rem
+
+// FacetSearch Styles
+.facetsearch
+  @extend .card
+  @extend .card-inverse
+
+  // Active
+  &.active
+    h3.facettitle
+      i.icon
+        @extend .fa-chevron-down
+
+    .facetlist
+      .facetitem
+        display: inherit
+
+  // Non-active
+  .facettitle
+    @extend .list-group-item
+    cursor: pointer
+    font-size: 75%
+    padding: 1rem 0.5rem
+
+    span.prefix
+      display: none
+      @extend .label
+      float: right
+      margin-right: 1rem
+
+      &.dmo
+        @extend .label-default
+
+      &.dmoi
+        @extend .label-success
+
+      &.dmoa
+        @extend .label-primary
+
+      &.ore
+        @extend .label-warning
+
+    i.help
+      @extend .fa-question-circle-o
+      cursor: help
+
+    i.icon
+      float: right
+      @extend .fa
+      @extend .fa-chevron-left
+
+  .facetlist
+    @extend .list-group
+    // height: 0
+    // overflow: hidden
+
+    .facetitem
+      @extend .list-group-item
+      padding: 0.25rem 1rem
+      font-size: 80%
+      cursor: pointer
+      font-weight: 300
+      display: none
+
+      .facetitemcount
+        float: right
+
+      &.no-match
+        cursor: not-allowed
+        background-color: #f3f3f3
+        font-style: italic
+
+      &.activefacet
+        background-color: #dff0d8 !important
+        // @extend .list-group-item-success
+        display: inherit
+
+.bottomline
+  @extend .card
+  @extend .card-block
+
+// Result List
+.list-group.record-list-group
+  .list-group-item
+    &:nth-child(odd)
+      background-color: lighten($list-group-hover-bg, 2%)
+
+    h4.card-title
+      font-size: 1rem
+
+// // // // // //
+
+// Detail view
+$sidebarTransition: margin-right .25s cubic-bezier(0,0,0,1.2)
+
+.drift-underlay
+  display: flex
+
+  justify-content: center
+  .drift-background
+    position: fixed
+    width: 75%
+    height: 110%
+    margin-top: -1rem
+    padding: 3rem
+    background-color: #FFF
+    opacity: 0
+    z-index: -10
+    left: 0
+
+  .drift-content
+    padding: 2rem
+    position: fixed
+    width: 75%
+    margin-top: 1rem
+    padding: 3rem
+    background-color: #FFF
+    opacity: 0
+    z-index: -10
+    left: 0
+    height: 75%
+
+  &.active
+    .drift-content, .drift-background
+      z-index: 0
+      opacity: 1
+
+
+
+// .underlay-wrapper
+//   position: fixed
+//   width: 75%
+//   height: 80%
+//   margin-top: -1rem
+//   padding: 3rem
+//   background-color: #FFF
+//   opacity: 0
+//   z-index: -10
+//   left: 0
+//   // margin-top: -3rem
+
+//   // z-index: 0
+//   // opacity: 1
+
+//   &.active
+//     z-index: 0
+//     opacity: 1
+
+.rdf-detail
+  $detailWidth: 25%
+  width: $detailWidth
+  position: fixed
+  right: 0
+  height: 100%
+  margin-right: -$detailWidth
+  transition: $sidebarTransition
+  margin-top: -1.5rem
+  // transition: margin-right .25s ease-out
+
+  &.active
+    margin-right: 0rem
+    z-index: 10
+
+  .card
+    height: 100%
+    +z-depth-2
+    overflow-y: scroll
+
+    .detail-close
+      color: #666
+      transition: color .3s ease-out
+      cursor: pointer
+      &:hover
+        color: #000
+
+
+// Result Child
+table.table.table-responsive.attr-table
+  td
+    font-size: 80%
+    padding: 0.25rem

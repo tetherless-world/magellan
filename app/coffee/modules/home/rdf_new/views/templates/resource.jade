@@ -1,0 +1,91 @@
+if title
+  table.table
+    tr
+      td
+        if uri
+          if icon
+            i.rdf-icon(class=icon)
+          a.uri-link(href=uri)= title
+
+        else
+          .uri-text= title
+
+    if prettyUri
+      tr
+        td
+          small.uri-text= prettyUri
+
+//- if prettyUri
+//-   .col-12
+//-     small.uri-text= prettyUri
+
+//-   .col-12
+//-     hr
+
+//- TODO - is is actually type
+//- if label != ' '
+//-   table.table
+//-     tr
+//-       td
+//-         .label-text Type:
+
+//-       td
+//-         .type(class=namespace) #{label || 'N/A'}
+
+//- TODO
+if label != ' '
+  table.table
+    tr
+      td
+        .label-text Type:
+
+      td
+        each type in _types
+          .type(class=type.css) #{type.text}
+
+//-   .col-12
+//-     small.uri-text= prettyUri
+
+//-   .col-12
+//-     hr
+
+
+//-   if uri
+//-     a(href=uri)= label
+//-     br
+//-     small.text-muted= uri
+
+//-   else
+//-     .text-muted= label || 'N/A'
+
+//- Attributes Table
+table.table
+
+  each rel, val in attribs
+    - depth = 0
+
+    //- .text-muted= val
+    if typeof(rel) == 'object'
+
+      if Array.isArray(rel)
+        each k in rel
+
+          if typeof(k) == 'object'
+
+            tr
+              td=k.objectOf[0].label + ': '
+              td=k.localPart
+
+            //- li(style='list-style: none;')
+            //-   .text-muted.pull-left=k.objectOf[0].label + ': '
+            //-   a(data-uri=k.uri)=k.localPart
+
+          else
+            tr
+              td= k
+              td
+
+  else
+    tr
+      td= k
+      td

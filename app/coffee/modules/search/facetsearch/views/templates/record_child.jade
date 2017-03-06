@@ -1,0 +1,23 @@
+.row
+  .col-xs-9
+
+    h4.card-title.m-b-0
+      i.fa.fa-fw(class=data.icon)
+      | &nbsp;
+      a(data-relation=data['@id'])= data['@id'].split('/').pop()
+      // a(data-click='show-detail' data-uri=data['@id'])= data['rdfs:Label']
+
+  .col-xs-3.text-xs-right
+    .btn.btn-secondary.btn-sm(data-toggle='tooltip', data-placement='left', title='Copy JSON to Clipboard', data-click='clipboard' style='line-height=0;')
+      i.fa.fa-files-o
+
+//- .row.m-t-1
+//-   .col-xs-12.text-xs-left
+
+//-     if data['@type']
+//-       each typ in data['@type']
+//-         label.label.m-a-0.label-primary.m-r-1
+//-           | #{typ}
+
+.row
+  .col-xs-12(data-region='viewer')

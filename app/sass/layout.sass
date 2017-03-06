@@ -1,0 +1,85 @@
+
+html, body.window
+  height: 100%
+
+$brdr-color: #ccc
+$sidebarTransition: margin-left .25s cubic-bezier(0,0,0,1.2)
+
+// TODO - Layout Styles should be included in their respective component repositories
+.flash-region
+  position: fixed
+  z-index: 1000
+  width: 50%
+  right: 0
+  margin-top: 7.5rem
+
+.header-region
+  position: fixed
+  width: 100%
+  z-index: 100
+  border: 1px solid $brdr-color
+  background-color: $body-bg
+
+.breadcrumb-region
+  +z-depth-1
+  position: fixed
+  z-index: 90
+  width: 100%
+  margin-top: 3.45rem
+  border-bottom: 1px solid $brdr-color
+  transition: $sidebarTransition
+
+.main-region
+  transition: opacity 0.25s ease-in-out
+  padding-top: 7.5rem
+
+.overlay-region
+  z-index: 0
+  width: 100%
+  height: 100%
+  position: fixed
+  background-color: #000
+  opacity: 0
+  transition: opacity .25s ease-out
+  pointer-events: none
+  .overlay
+    width: 100%
+    height: 100%
+
+  &.active
+    z-index: 80
+    opacity: 0.60
+
+.sidebar-region
+  position: fixed
+  z-index: 100
+  width: 14rem
+  background: $body-bg
+  height: 200%
+  left: 0
+  margin-left: -14rem
+  margin-top: 3.5rem
+  border-right: 1px solid $brdr-color
+  transition: $sidebarTransition
+
+  a.nav-link.divider
+    padding: 0.2rem 1rem
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+
+// // // //
+
+body.window.sidebar-active
+
+  .sidebar-region
+    margin-left: 0rem
+
+  .breadcrumb-region
+    margin-left: 14rem
+
+  .overlay-region
+    z-index: 80
+    opacity: 0.60
+    pointer-events: all
+
+  .main-region
+    filter: blur(10px)

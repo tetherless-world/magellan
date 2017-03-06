@@ -1,0 +1,23 @@
+.row
+  .col-xs-12
+    h4.card-title= label
+    hr
+
+.row
+  .col-xs-6
+
+    p.lead #{graph.length} Items
+
+    a.btn.btn-primary-outline.w-100(href="#datasets/#{id}/search")
+      i.fa.fa-fw.fa-search
+      | &nbsp;
+      | Search Dataset
+
+  .col-xs-6
+    p.lead Context
+    ul.list-group
+      each ctx, prefix in context
+        li.list-group-item
+          strong= prefix
+          br
+          = ctx

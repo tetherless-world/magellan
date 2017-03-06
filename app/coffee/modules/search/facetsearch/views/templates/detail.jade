@@ -1,0 +1,22 @@
+
+.row.header
+  .col-xs-12
+    i.fa.fa-2x.fa-times.detail-close(data-click='close')
+
+  .col-xs-12.m-t-1
+    h4.card-title
+      i.fa.fa-fw(class=data.icon)
+      | &nbsp;
+      //- a(href=data.url, target='_blank')= data.Label
+      = data['@id'].split('/').pop()
+
+if data.imageSrc
+  .row
+    .col-xs-12.text-center
+      img.img-thumbnail(data-zoom=data.imageSrc, src=data.imageSrc, style='max-height:30rem;')
+
+else
+  .row.m-t-1
+    .col-xs-12
+      table.table.table-responsive.attr-table
+        include ./table

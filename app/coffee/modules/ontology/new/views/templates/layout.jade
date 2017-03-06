@@ -1,0 +1,15 @@
+include ../../../../base/partials/form_helpers
+
+.row
+  .col-xs-6
+    +formInput({ label: 'ID', placeholder: 'ID', name: 'id', type: 'text' })
+
+  .col-xs-6(data-region='upload')
+
+  .col-xs-12
+    +submitButton({})
+
+  //- .col-xs-6= id
+  //- .col-xs-12= label
+  //- .col-xs-12= tooltip
+  //- .col-xs-12= prefix

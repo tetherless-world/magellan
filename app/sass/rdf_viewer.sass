@@ -1,0 +1,232 @@
+// RDF Viewer SASS
+
+// $oreColor: #e4f7ff
+$oreColor: $brand-success
+// $dmoColor: #ffe6e6
+// $dmoColor: #244fff
+$dmoColor: $brand-info
+// $dmoaColor: #fb5555
+$dmoaColor: $brand-danger
+$dmoiColor: #000
+
+// $oreColor: #feffd8
+// $oreColor: #e4f7ff
+
+.predicate
+  .btn
+    @extend .btn-secondary
+    font-weight: 500
+    &.btn-dmo
+      // @extend .btn-info
+      @extend .text-info
+      // background-color: $dmoColor
+
+    &.btn-dmoa
+      // @extend .btn-danger
+      @extend .text-danger
+      // background-color: $dmoaColor !important
+
+    &.btn-dmoi
+      // @extend .btn-secondary
+      // background-color: $dmoiColor !important
+
+    &.btn-ore
+      // @extend .btn-success
+      @extend .text-success
+      // background-color: $oreColor !important
+
+// // // // // //
+
+// TODO - this should be abstracted into child styles
+.type
+  text-align: right
+  &.dmo
+    color: $dmoColor
+
+  &.dmoa
+    color: $dmoaColor !important
+
+  &.dmoi
+    color: $dmoiColor !important
+
+  &.ore
+    color: $oreColor !important
+
+// // // // // //
+
+i.rdf-icon
+  @extend .fa
+  @extend .fa-fw
+  @extend .fa-folder-open-o
+  margin-right: 0.5rem
+
+  // &.result, &.R1, &.R2, &.R3, &.R4, &.R5, &.R6, &.plot_data
+  //   @extend .fa-line-chart
+
+  &.Directory
+    @extend .fa-folder-open-o
+
+  &.txt
+    @extend .fa-file-text
+
+  &.csv, &.xls, &.xlsx
+    @extend .fa-file-excel-o
+
+  &.png, &.jpg, &.gif
+    @extend .fa-file-image-o
+
+  &.pdf
+    @extend .fa-file-o
+
+  &.File
+    // @extend .fa-file-o
+
+    &.txt
+      @extend .fa-file-text
+
+    &.csv, &.xls, &.xlsx
+      @extend .fa-file-excel-o
+
+    &.png
+      @extend .fa-file-image-o
+
+//  /// // /// //
+
+div.card.resource
+  font-size: 12px
+  font-family: Helvetica, Verdana, Arial, sans-serif
+  position: absolute
+  background-color: #fff
+  border: none
+  margin: 0
+  margin-left: auto
+  margin-right: auto
+  padding: 0.5rem
+  min-width: 0
+  width: auto
+  $defaultColor: #ffffff
+  background-color: $defaultColor
+  transition: box-shadow .25s ease-in-out
+  +z-depth-1
+
+  table.table
+    margin-bottom: 0
+    td
+      padding: 0
+      border-top: none
+      &:nth-child(2)
+        text-align: right
+
+  &:hover, &.active
+    +z-depth-2
+
+  &.dmo
+    // background-color: $dmoColor
+
+  &.dmoa
+    // background-color: $dmoaColor !important
+
+  &.dmoi
+    // background-color: $dmoiColor !important
+
+  &.ore
+    // background-color: $oreColor !important
+
+line.link
+  stroke: #999
+  stroke-width: 1.5
+
+text.link
+  font-size: 12px
+  font-family: Helvetica, Verdana, Arial, sans-serif
+
+polygon.arrowhead
+  stroke: #999
+  fill: #999
+  stroke-width: 1
+
+.selector
+  stroke-width: 2px
+  stroke: #666
+  fill: none
+  display: none
+
+:root
+  -webkit-print-color-adjust: exact
+
+.rdf-viewer-wrapper
+  height: 50rem
+
+.rdf-canvas
+  stroke-width: 3
+  stroke: #e5e5e5
+  fill: #f3f3f3
+  // fill: #f3f3f3
+  height: 10000
+  width: 10000
+
+// $sidebarTransition: margin-right .25s cubic-bezier(0,0,0,1.2)
+
+// .rdf-key
+//   $keyWidth: 8rem
+//   width: $keyWidth
+//   position: absolute
+//   right: 0
+//   height: 100%
+//   margin-right: 1rem
+//   // margin-top: -3.2rem
+
+//   .list-group-item .label.color
+//     float: left
+//     margin-top: .25rem
+//     margin-right: .5rem
+
+//     .txt
+//       visibility: hidden
+
+//     &.ore
+//       background-color: $oreColor
+
+//     &.dmo
+//       background-color: $dmoColor
+
+//     &.dmoa
+//       background-color: $dmoaColor
+
+//     &.dmoi
+//       background-color: $dmoiColor
+
+//   // margin-top: -4.5rem
+
+// .rdf-detail
+//   $detailWidth: 24rem
+//   width: $detailWidth
+//   position: fixed
+//   right: 0
+//   height: 100%
+//   margin-right: -$detailWidth
+//   transition: $sidebarTransition
+//   margin-top: -4.5rem
+//   // transition: margin-right .25s ease-out
+
+//   &.active
+//     margin-right: 0rem
+
+//   .card
+//     height: 100%
+//     +z-depth-2
+
+//     .detail-close
+//       color: #666
+//       transition: color .3s ease-out
+//       cursor: pointer
+//       &:hover
+//         color: #000
+
+
+
+
+
+
+
+// //
