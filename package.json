@@ -1,7 +1,7 @@
 {
-  "name": "am_client",
+  "name": "magellan",
   "version": "0.0.1",
-  "description": "DARPA AM Client Application",
+  "description": "Magellan Data Explorer",
   "dependencies": {
     "Marionette.AnimatedRegion": "git+https://github.com/aeksco/Marionette.AnimatedRegion.git",
     "babel-preset-es2015": "^6.22.0",
@@ -33,7 +33,7 @@
     "facetview2": "git+https://github.com/aeksco/facetview2.git",
     "font-awesome": "~4.7",
     "gulp": "^3.9.0",
-    "gulp-browserify": "~0.5.1",
+    "gulp-browserify": "^0.5.1",
     "gulp-coffeelint": "~0.5.0",
     "gulp-concat": "~2.5.2",
     "gulp-jade": "~1.0.1",
@@ -63,7 +63,7 @@
     "jsonld-vis": "^1.0.1",
     "marionette-service": "~0.0",
     "moment": "~2.10",
-    "nw-builder": "^3.1.3",
+    "nw-builder": "^3.2.0",
     "qs": "~6.0",
     "sortablejs": "~1.4",
     "tether": "~1.1",

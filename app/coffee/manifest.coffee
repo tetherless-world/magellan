@@ -26,14 +26,24 @@ DexieService = require './modules/db/service'
 # Components are routeless services with views that are
 # accessible anywhere in the application
 # Used to manage the header, sidebar, flash, and confirm UI elements
+
+# Header Component Initialization
 # TODO - abstract into Henson.js
 HeaderComponent = require './components/header/component'
 new HeaderComponent({ container: AppLayout.header })
 
+# Modal Component Initialization
+ModalComponent = require './components/modal/component'
+new ModalComponent({ container: AppLayout.modal })
+
+# Confirm Component Initialization
+ConfirmComponent = require './components/confirm/component'
+new ConfirmComponent({ container: AppLayout.modal })
+
 # Henson.js Sidebar configuration
 menuItems = [
-  { href: '#home',        icon: 'fa-home',      title: 'Server Home' }
-  { href: '#data',        icon: 'fa-database',  title: 'Server Data', divider: true }
+  # { href: '#home',        icon: 'fa-home',      title: 'Server Home' }
+  # { href: '#data',        icon: 'fa-database',  title: 'Server Data', divider: true }
   { href: '#datasets',    icon: 'fa-search',    title: 'Datasets', divider: true }
   { href: '#ontologies',  icon: 'fa-sitemap',   title: 'Ontologies', divider: true }
   { href: '#settings',    icon: 'fa-cog',       title: 'Settings', divider: true }

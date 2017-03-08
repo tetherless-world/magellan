@@ -1,4 +1,6 @@
 
+# TODO - this needs to be decomissioned
+# in favor of a configuration-based approach.
 class RecordDecorator extends Mn.Decorator
 
   icon: ->
@@ -34,7 +36,7 @@ class RecordDecorator extends Mn.Decorator
 class RecordModel extends Backbone.Model
   url: 'record'
   idAttribute: '@id'
-  decorator: RecordDecorator
+  # decorator: RecordDecorator
 
   stringifyJson: ->
     return JSON.stringify(@toJSON(), null, 2)

@@ -1,12 +1,12 @@
 # NodeWebKit package.json
 config =
-  name:       'DARPA_Manufacturing_Ontology'
+  name:       'Magellan_Data_Explorer'
   version:    '0.0.1'
   main:       'index.html'
   'node-main':  './server_js/server.js'
   # 'node-main':  './js/server.js'
   window:
-    title:      'DARPA Manufacturing Ontology'
+    title:      'Magellan - Data Explorer'
     icon:       './img/icon.png'
     toolbar:    true
     frame:      true

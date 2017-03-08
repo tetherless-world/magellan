@@ -24,7 +24,9 @@ class FacetedViewLayout extends Mn.LayoutView
 
     # Shows HeaderView
     # TODO - rename to ControlsView / @controlsRegion
-    @headerRegion.show new HeaderView({ model: @model })
+    headerView = new HeaderView({ model: @model })
+    headerView.on 'clear', => jQuery.clearFacets()
+    @headerRegion.show headerView
 
     # Initializes FacetView
     setTimeout(@initFacetView, 100)

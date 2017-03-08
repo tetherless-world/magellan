@@ -1,6 +1,11 @@
 .row
-  .col-xs-12.text-xs-right
+  .col-xs-6.text-xs-left
+    a.btn.btn-secondary( data-click='clear')
+      i.fa.fa-fw.fa-times-circle-o
+      | &nbsp;
+      | Clear Filters
 
+  .col-xs-6.text-xs-right
     .btn-group
       a.btn.btn-primary-outline( href="#datasets/#{id}/settings" data-click='settings')
         i.fa.fa-fw.fa-cog

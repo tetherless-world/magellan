@@ -9,7 +9,11 @@ include ../../../../base/partials/form_helpers
     +formInput({ formGroupCss: 'm-b-0', name: 'enabled', type: 'checkbox', value: enabled })
 
   .col-xs-4= label
-  .col-xs-4= id
+  .col-xs-3= id
+
+  .col-xs-1
+    .btn.btn-sm.btn-secondary(data-click='edit')
+      i.fa.fa-fw.fa-pencil
 
   //- .col-xs-6= id
   //- .col-xs-12= label

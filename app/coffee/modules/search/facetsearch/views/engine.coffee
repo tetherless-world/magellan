@@ -561,6 +561,13 @@ jQuery.facetUpdate = ->
   updateResults()
   return
 
+# TODO - this must be implemented in a cleaner way
+# The 'ENGINE' should operate as its own class with a clearFilters method
+jQuery.clearFacets = ->
+  settings.state.filters = {}
+  jQuery.facetUpdate()
+  return
+
 # Shows more results
 # moreButton = undefined
 return

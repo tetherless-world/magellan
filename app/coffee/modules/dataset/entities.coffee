@@ -18,12 +18,13 @@ class DatasetModel extends Backbone.Model
 
         # In ontology attribute is defined (i.e. FOUND)
         if attribute
-          # console.log attribute
-          label = attribute['rdfs:label']
+          label   = attribute['rdfs:label']
           tooltip = attribute['rdfs:comment']
 
+        # Ontology attribute was not found
+        # We define placeholder label and tooltip
         else
-          label = id
+          label   = id
           tooltip = 'NULL'
 
         # Assembles individual facet object
@@ -34,6 +35,7 @@ class DatasetModel extends Backbone.Model
           enabled:  true
           tooltip:  tooltip
 
+        # Returns the generated facet
         return resolve(facet)
 
   # TODO - must ensure that graph elements have been loaded
@@ -72,7 +74,6 @@ class DatasetModel extends Backbone.Model
         # Assigns facets to facet collection
         @facetCollection = Backbone.Radio.channel('facet').request('collection', all)
         return resolve(@facetCollection)
-
 
 # # # # #
 

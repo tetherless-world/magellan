@@ -52,7 +52,7 @@ mixin submitButton(opts)
   unless opts.icon
     - opts.icon = 'fa-check'
 
-  +button(opts)(data-click='submit', class='btn-success w-100')&attributes(attributes)
+  +button(opts)(data-click='submit', class='btn-success')&attributes(attributes)
 
 //- // // // // //
 

@@ -10,6 +10,7 @@ SettingsRoute = require './settings/route'
 class DatasetRouter extends require 'hn_routing/lib/router'
 
   routes:
+    '(/)':                      'list' # ROOT
     'datasets(/)':              'list'
     'datasets/:id/search(/)':   'search'
     'datasets/:id/settings(/)': 'settings'
