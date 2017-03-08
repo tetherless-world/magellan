@@ -25,7 +25,7 @@ class DatasetModel extends Backbone.Model
         # We define placeholder label and tooltip
         else
           label   = id
-          tooltip = 'NULL'
+          tooltip = ''
 
         # Assembles individual facet object
         facet =
