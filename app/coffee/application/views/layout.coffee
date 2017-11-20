@@ -9,20 +9,14 @@ class ApplicationLayout extends Marionette.LayoutView
 
   regions:
     header:     '[app-region=header]'
-    sidebar:    '[app-region=sidebar]'
     breadcrumb: '[app-region=breadcrumb]'
     overlay:    '[app-region=overlay]'
+    loading:    '[app-region=loading]'
     flash:      '[app-region=flash]'
 
     modal:
       selector:     '[app-region=modal]'
       regionClass:  require 'hn_regions/lib/regions/modal'
-
-    # main:
-    #   selector:     '[app-region=main]'
-    #   regionClass:  require 'Marionette.AnimatedRegion/lib/animatedRegion'
-    #   inAnimation:  'fadeInUp'
-    #   outAnimation: 'fadeOutDown'
 
     main:     '[app-region=main]'
 

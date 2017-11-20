@@ -1,0 +1,24 @@
+include ../../../../base/partials/form_helpers
+
+.row
+  .col-lg-12
+    p.lead Import Rules
+
+  .col-lg-12
+    .alert.alert-primary
+      i.fa.fa-fw.fa-cloud-download
+      | &nbsp;
+      strong Import
+      p.mb-0 This action imports Knowledge Capture rules exported by Magellan.
+
+  .col-lg-12
+    hr
+
+  .col-lg-12(data-region='upload')
+
+  .col-lg-12
+    hr
+
+  .col-lg-12
+    +cancelButton({})
+    +submitButton({})

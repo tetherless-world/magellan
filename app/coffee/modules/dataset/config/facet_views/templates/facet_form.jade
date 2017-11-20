@@ -1,0 +1,26 @@
+include ../../../../base/partials/form_helpers
+
+.row
+  .col-lg-12
+    h4.card-title Edit Facet
+
+  .col-lg-12
+    hr
+
+.row
+  .col-lg-6
+    +formInput({ label: 'Label', placeholder: 'Label', name: 'label', type: 'text' })
+
+  .col-lg-6
+    +formInput({ label: 'Enabled', formGroupCss: 'm-b-0', name: 'enabled', type: 'checkbox', value: enabled })
+
+  .col-lg-12
+    +formTextArea({ label: 'Tooltip', placeholder: 'Tooltip', name: 'tooltip', type: 'text' })
+
+.row
+  .col-lg-12
+    hr
+
+  .col-lg-12
+    +cancelButton({})
+    +submitButton({})

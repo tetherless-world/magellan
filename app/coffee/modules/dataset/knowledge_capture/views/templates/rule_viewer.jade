@@ -1,0 +1,31 @@
+.row
+  .col-lg-8
+    h4.card-title
+      //- i.fa.fa-fw(class=icon)
+      //- | &nbsp;
+      | Rule Details
+
+  .col-lg-4.text-right
+    button.btn.btn-sm.btn-outline-secondary.mr-2( data-click='edit' )
+      i.fa.fa-fw.fa-pencil
+      | &nbsp;
+      | Edit
+
+    button.btn.btn-sm.btn-outline-danger( data-click='destroy' )
+      i.fa.fa-fw.fa-trash
+      | &nbsp;
+      | Destroy
+
+  .col-lg-12
+    hr
+
+.row
+  .col-lg-12
+    //- p.lead Order: #{order}
+    p.lead Enabled: #{enabled}
+    //- p.lead Type: #{type}
+    p.lead Target: #{target_property}
+
+    hr
+
+    p.lead Definitions: #{definitions.length}

@@ -1,47 +1,40 @@
-
 Entities = require './entities'
+DexieFactory  = require '../base/dexieFactory'
 
 # # # # #
 
-# TODO - abstract patterns here into DexieFactory?
-class DatasetFactory extends Marionette.Service
+class DatasetFactory extends DexieFactory
 
-  # Defines radioRequests
+  tableName: 'datasets'
+
   radioRequests:
-    'dataset model':       'getModel'
-    'dataset collection':  'getCollection'
+    'dataset model':      'getModel'
+    'dataset save':       'saveModel'
+    'dataset destroy':    'destroyModel'
+    'dataset collection': 'getCollection'
 
   initialize: ->
-    @cached = new Entities.Collection()
+    @cachedCollection = new Entities.Collection()
 
-  # TODO - this should accept a query
   getCollection: ->
+
+    # Ensures presence of @db variable
+    @ensureDb()
+
+    # Returns a Promise to manage async DB operations
     return new Promise (resolve, reject) =>
 
-      table = 'datasets' # MODEL.urlRoot
-      window.db[table].toArray().then (models) =>
-        @cached.reset(models)
-        @cached._synced = true
-        return resolve(@cached)
-      # TODO - catch statement
+      # Fetches all records from Dexie
+      @db[@tableName].toArray()
 
-  # getCollection: ->
-  #   return @cached if @cached._synced
-  #   @cached.reset(datasets)
-  #   @cached._synced = true
-  #   return @cached
+      # Fetches successfully
+      .then (models) =>
+        @cachedCollection.reset(models)
+        return resolve(@cachedCollection)
 
-  getModel: (id) ->
-    return new Promise (resolve, reject) =>
-
-      # Resolves if ID is undefined
-      return resolve(new Entities.Model()) unless id
-
-      # Returns from @cached if synced
-      return resolve(@cached.get(id)) if @cached._synced
-
-      # Gets @cached and returns
-      return @getCollection().then () => resolve(@cached.get(id))
+      # Error handling
+      .catch (err) =>
+        return reject(err)
 
 # # # # #
 

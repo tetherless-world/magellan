@@ -1,22 +1,57 @@
 
 .row.header
-  .col-xs-12
+  .col-lg-12
     i.fa.fa-2x.fa-times.detail-close(data-click='close')
 
-  .col-xs-12.m-t-1
-    h4.card-title
-      i.fa.fa-fw(class=data.icon)
-      | &nbsp;
-      //- a(href=data.url, target='_blank')= data.Label
-      = data['@id'].split('/').pop()
+  .col-lg-12.mt-2
+    h4.card-title= data['rdfs:label']
 
-if data.imageSrc
+//- Image Viewer
+if views.img
+  .row.mb-1
+    .col-lg-12.text-center
+      img.img-thumbnail(data-zoom=views.img, src=views.img, style='max-height:15rem;')
+
+//- PDF Viewer
+if views.pdf
   .row
-    .col-xs-12.text-center
-      img.img-thumbnail(data-zoom=data.imageSrc, src=data.imageSrc, style='max-height:30rem;')
+    .col-lg-12.text-center
+      iframe.w-100(src=views.pdf, style='min-height:15rem;')
 
-else
-  .row.m-t-1
-    .col-xs-12
-      table.table.table-responsive.attr-table
-        include ./table
+//- PDF Viewer
+if views.download_url
+  .row
+    .col-lg-12
+      a.btn.btn-outline-success.w-100(href=views.download_url, target='_blank')
+        i.fa.fa-fw.fa-cloud-download.mr-1
+        | Download
+
+//- Audio Viewer
+if views.audio
+  .row
+    .col-lg-12
+      a.btn.btn-outline-primary.w-100(href=views.audio, target='_blank')
+        i.fa.fa-fw.fa-file-audio-o
+        | &nbsp;
+        | Listen
+
+//- Viewer Region
+.row
+  .col-lg-12(data-region='viewer')
+
+//- DICOM
+if views.dicom
+  p.lead DICOM VIEWER
+  #dicomImage(style="width:512px;height:512px;")
+
+//- Video Viewer
+if views.video
+  video(width='320', height='240', controls='')
+    source(src=views.video, type='video/mp4')
+    | Your browser does not support the video tag.
+
+//- Table View
+.row.mt-2
+  .col-lg-12
+    table.table.table-responsive.attr-table
+      include ./table

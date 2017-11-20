@@ -1,0 +1,21 @@
+include ../../../../base/partials/form_helpers
+
+.col-lg-12
+
+  input(type='hidden', name='action', value='replace')
+
+  .alert.alert-primary
+    i.fa.fa-fw.fa-strikethrough
+    | &nbsp;
+    strong Replace
+    br
+    | Returns a copy of text source with text replacement.
+
+.col-lg-12
+  +formSelect({ label: 'Text Source', name: 'replace_source', options: sourceOptions })
+
+.col-lg-12
+  +formInput({ label: 'Text to Replace', placeholder: 'Text to Replace', name: 'replace_text', type: 'text' })
+
+.col-lg-12
+  +formInput({ label: 'Replace With', placeholder: 'Replace With', name: 'replace_with', type: 'text' })

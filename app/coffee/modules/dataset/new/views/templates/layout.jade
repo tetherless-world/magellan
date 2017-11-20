@@ -1,17 +1,16 @@
-include ../../../../base/partials/form_helpers
-
 .row
-  .col-xs-6
-    +formInput({ label: 'Label', placeholder: 'Label', name: 'label', type: 'text' })
+  .col-lg-12
+    .card.card-body
+      .row
+        .col-lg-12
+          h4.card-title New Archive
 
-    +formInput({ label: 'ID', placeholder: 'ID', name: 'id', type: 'text' })
+        .col-lg-12
+          hr
 
-  .col-xs-6(data-region='upload')
+        .col-lg-12( data-region='nav' )
 
-  .col-xs-12
-    +submitButton({})
+        .col-lg-12
+          hr
 
-  //- .col-xs-6= id
-  //- .col-xs-12= label
-  //- .col-xs-12= tooltip
-  //- .col-xs-12= prefix
+        .col-lg-12( data-region='content' )

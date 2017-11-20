@@ -1,0 +1,21 @@
+include ../../../../base/partials/form_helpers
+
+.col-lg-12
+
+  input(type='hidden', name='action', value='index_from_split')
+
+  .alert.alert-primary
+    i.fa.fa-fw.fa-code-fork
+    | &nbsp;
+    strong Index From Split
+    br
+    | Splits a string at a character and returns the sub-string at specified index.
+
+.col-lg-4
+  +formSelect({ label: 'Source', name: 'index_from_split_source', options: sourceOptions })
+
+.col-lg-4
+  +formInput({ label: 'Split At', placeholder: 'Split At', name: 'index_from_split_delimiter', type: 'text' })
+
+.col-lg-4
+  +formInput({ label: 'Index', placeholder: 'Index', name: 'index_from_split_index', type: 'text' })

@@ -1,0 +1,19 @@
+include ../../../../base/partials/form_helpers
+
+.row
+  .col-lg-12
+    p.lead Reset Rules
+
+  .col-lg-12
+    .alert.alert-danger
+      i.fa.fa-fw.fa-warning
+      | &nbsp;
+      strong WARNING
+      p.mb-0 This action restores the dataset to its default values before any rules were applied. This action is destructive.
+
+  .col-lg-12
+    hr
+
+  .col-lg-12
+    +cancelButton({})
+    +submitButton({})

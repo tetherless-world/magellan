@@ -1,0 +1,18 @@
+include ../../../../base/partials/form_helpers
+
+.col-lg-3
+
+  .row
+    .col-lg-12
+      +formSelect({ label: 'Viewer Type', name: 'target_property', options: [['img', 'Image Viewer'], ['pdf', 'PDF Viewer'], ['csv', 'CSV Viewer'], ['download_url', 'Download Link']] })
+
+  button.btn.btn-outline-primary.w-100.mb-2( data-click='add' )
+    i.fa.fa-fw.fa-plus-circle
+    | &nbsp;
+    | Add Definition
+
+.col-lg-9(data-region='definitions')
+
+.col-lg-12
+  +cancelButton({})
+  +submitButton({})

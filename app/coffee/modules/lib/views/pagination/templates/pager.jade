@@ -1,0 +1,27 @@
+- attrs = { style: 'border-radius: 0;' }
+
+//- Prev
+if currentPage - 1 > 0
+  li.pager-prev
+    a.cursor-pointer.z-depth-1( data-click='prev' )&attributes(attrs)
+      i.fa.fa-angle-left
+
+else
+  li.disabled.pager-prev
+    a()&attributes(attrs)
+      i.fa.fa-angle-left
+
+li
+  a( style='border:none;background:none;' )
+    .text-muted.text-center= displayText
+
+//- Next
+if currentPage < totalPages
+  li.pager-next
+    a.cursor-pointer.z-depth-1( data-click='next' )&attributes(attrs)
+      i.fa.fa-angle-right
+
+else
+  li.disabled.pager-next
+    a()&attributes(attrs)
+      i.fa.fa-angle-right

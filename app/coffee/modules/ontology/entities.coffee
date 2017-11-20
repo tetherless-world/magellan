@@ -1,8 +1,10 @@
 
-# TODO - add associated ontology models
-
 class OntologyModel extends Backbone.Model
   url: 'ontologies'
+
+  # Overwritten save method
+  save: ->
+    Backbone.Radio.channel('ontology').request('save', @)
 
 # # # # #
 

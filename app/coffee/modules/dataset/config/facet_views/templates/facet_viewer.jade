@@ -1,0 +1,57 @@
+.row
+  .col-lg-6
+    h4.card-title= label
+
+  .col-lg-6.text-right
+
+    button.btn.btn-sm.btn-outline-secondary.mr-2( data-click='link' )
+      i.fa.fa-fw.fa-link
+      | &nbsp;
+      | Link to Ontology
+
+    button.btn.btn-sm.btn-outline-success( data-click='edit' )
+      i.fa.fa-fw.fa-pencil
+      | &nbsp;
+      | Edit
+
+  .col-lg-12
+    hr
+
+.row
+
+  //- ATTRIBUTE
+  .col-lg-12
+    .alert.alert-primary
+      i.fa.fa-fw.fa-search
+      | &nbsp;
+      | Matches the
+      strong  #{attribute}
+      |  attribute.
+
+  //- TOOLTIP
+  .col-lg-12
+    if tooltip
+      .alert.alert-primary
+        i.fa.fa-fw.fa-question-circle-o
+        | &nbsp;
+        =tooltip
+
+    else
+      .alert.alert-warning
+        i.fa.fa-fw.fa-warning
+        | &nbsp;
+        | No tooltip defined for this facet.
+
+  //- ENABLED
+  .col-lg-12
+    if enabled
+      .alert.alert-success
+        i.fa.fa-fw.fa-check-circle-o
+        | &nbsp;
+        | Facet is enabled.
+
+    else
+      .alert.alert-warning
+        i.fa.fa-fw.fa-warning
+        | &nbsp;
+        | Facet is not enabled.

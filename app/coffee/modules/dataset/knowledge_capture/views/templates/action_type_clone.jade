@@ -1,0 +1,16 @@
+include ../../../../base/partials/form_helpers
+
+.col-lg-12
+
+  input(type='hidden', name='action', value='clone')
+
+  .alert.alert-primary
+    i.fa.fa-fw.fa-copy
+    | &nbsp;
+    strong Clone
+    br
+    | Clones the attribute defined in the Clone From field.
+
+
+.col-lg-4
+  +formSelect({ label: 'Clone From', name: 'clone_source', options: sourceOptions })

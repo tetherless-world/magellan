@@ -1,4 +1,6 @@
 LayoutView = require './views/layout'
+DatasetCreator = require '../creator'
+ArchiveImporter = require '../importer'
 
 # # # # #
 
@@ -7,7 +9,8 @@ class NewDatasetRoute extends require 'hn_routing/lib/route'
   title: 'Magellan - New Dataset'
 
   breadcrumbs: [
-    { text: 'Datasets', href: '#datasets' }
+    { text: 'Home', href: '#' }
+    { text: 'Archives', href: '#datasets' }
     { text: 'New' }
   ]
 
@@ -16,7 +19,7 @@ class NewDatasetRoute extends require 'hn_routing/lib/route'
     .then (model) => @model = model
 
   render: ->
-    @container.show new LayoutView({ model: @model })
+    @container.show new LayoutView({ model: @model, creator: DatasetCreator, importer: ArchiveImporter })
 
 # # # # #
 

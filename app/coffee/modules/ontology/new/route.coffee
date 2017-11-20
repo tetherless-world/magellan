@@ -7,6 +7,7 @@ class NewDatasetRoute extends require 'hn_routing/lib/route'
   title: 'Magellan - New Ontology'
 
   breadcrumbs: [
+    { text: 'Home', href: '#' }
     { text: 'Ontologies', href: '#ontologies' }
     { text: 'New' }
   ]

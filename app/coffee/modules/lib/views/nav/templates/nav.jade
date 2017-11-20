@@ -1,0 +1,13 @@
+.row
+
+  if stacked
+    div( data-region='nav' class="col-xs-#{span}" )
+    div( data-region='content' class="col-xs-#{12-span}" )
+
+  else
+    .col-lg-12
+      .row
+        .col-lg-12( data-region='nav' )
+
+      .row.mt-3
+        .col-lg-12( data-region='content' )

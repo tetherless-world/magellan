@@ -1,6 +1,4 @@
 # Support for cross-domain requests in Backbone.js - usually verboten.
-# This allows the dev server at local.corticalmetrics.com:8080 to communicate with dev.corticalmetrics.com:3000 (cm-node-app)
-
 crossDomainRoot = 'http://192.168.33.33:3000' # DEV ONLY
 
 proxiedSync = Backbone.sync

@@ -1,0 +1,29 @@
+include ../../../../base/partials/form_helpers
+
+.row
+  .col-lg-12
+    .card.card-body
+      .row
+        .col-lg-12
+          h4.card-title Destroy Dataset
+
+        .col-lg-12
+          hr
+
+        .col-lg-12
+          .alert.alert-danger.mb-0
+            i.fa.fa-fw.fa-trash
+            | &nbsp;
+            strong Destroy
+            br
+            | Destroys the dataset and it's associated data. This action is permanent.
+
+        .col-lg-12
+          hr
+
+        .col-lg-12.text-right
+
+          button.btn.btn-danger.mr-2( data-click='confirm' )
+            i.fa.fa-fw.fa-trash
+            | &nbsp;
+            | Destroy

@@ -1,76 +1,36 @@
-Marionette = require 'backbone.marionette'
+ArchiveForm = require './archiveForm'
+JsonForm    = require './jsonForm'
+RdfForm     = require './rdfForm'
 
 # # # # #
 
-# TODO - abstract into Henson
-class UploadWidget extends Mn.LayoutView
-  template: require './templates/upload'
-  className: 'form-group'
-
-  events:
-    'change input[type=file]': 'onInputChange'
-
-  onInputChange: (e) ->
-
-    # Cache e.target
-    file = e.target.files[0]
-
-    # Return without a file
-    return unless file
-
-    # Parse text inside input file
-    fileReader = new FileReader()
-    fileReader.onload = => @onFileLoaded(fileReader.result)
-    fileReader.readAsText(file)
-
-  # On Uploaded callback
-  # Parses JSON from text and sends to parent view
-  onFileLoaded: (text) ->
-    parsed = JSON.parse(text)
-    @trigger 'parse', parsed
-
-# # # # #
-
-class NewDatasetLayout extends Mn.LayoutView
+class ImportSelectorView extends require 'lib/views/nav'
+  className: 'container'
   template: require './templates/layout'
-  className: 'container-fluid'
 
-  behaviors:
-    SubmitButton: {}
+  navItems: [
+    { icon: 'fa-folder-open-o', text: 'Archive',    trigger: 'archive', default: true }
+    { icon: 'fa-code',    text: 'JSON-LD',   trigger: 'json' }
+    { icon: 'fa-file', text: 'RDF/XML',    trigger: 'rdf' }
+  ]
 
-  regions:
-    uploadRegion: '[data-region=upload]'
+  navEvents:
+    'archive':  'archive'
+    'json':     'json'
+    'rdf':      'rdf'
 
-  onRender: ->
-    uploadWidget = new UploadWidget()
-    uploadWidget.on 'parse', @onJsonUpload # TODO
-    @uploadRegion.show uploadWidget
-    @disableSubmit()
+  navOptions:
+    pills: true
 
-  onJsonUpload: (parsedJson) =>
-    # Sets context and graph attributes on dataset model
-    @model.set('context', parsedJson['@context'])
-    @model.set('graph', parsedJson['@graph'])
-    @enableSubmit()
+  archive: ->
+    @contentRegion.show new ArchiveForm({ model: @model, creator: @options.creator, importer: @options.importer })
 
-  onSubmit: ->
-    data = Backbone.Syphon.serialize(@)
-    data.id = data.label.toLowerCase().replace(' ', '_')
-    @model.set(data)
-    @saveToDexie()
+  json: ->
+    @contentRegion.show new JsonForm({ model: @model, creator: @options.creator })
 
-  # TODO - abstract into DexieService
-  # TODO - should this be abstracted into a Dexie model?
-  # Or should the DexieService fire the required events
-  # on the Backbone.Model?
-  saveToDexie: ->
-    table = 'datasets' # MODEL.urlRoot
-
-    window.db[table].add(@model.toJSON())
-    .then (model_id) => Backbone.Radio.channel('app').trigger('redirect', '#datasets')
-
-    .catch (err) => console.log 'ERROR CAUGHT'
+  rdf: -> # TODO - pass RDFImporter to this view
+    @contentRegion.show new RdfForm({ model: @model, creator: @options.creator })
 
 # # # # #
 
-module.exports = NewDatasetLayout
+module.exports = ImportSelectorView

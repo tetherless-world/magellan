@@ -1,14 +1,11 @@
 
 class CsvViewer extends Mn.LayoutView
-  # template: require './templates/csv'
-  template: false
-  className: 'card card-block'
+  template: require './templates/csv'
+  className: 'card card-body'
 
   onRender: ->
-    console.log 'RENDER CSV VIEWER'
-    url = @model.csvSrc()
-    console.log url
-    # loadCsv(url)
+    url = @model.get('views').csv
+    @loadCsv(url)
 
   loadCsv: (url) ->
 
@@ -26,14 +23,14 @@ class CsvViewer extends Mn.LayoutView
       return @renderCsv(xhr.response) if status == 'success'
 
     # Sends XHR, triggers request event
-    xhr.send(params)
+    xhr.send()
 
   renderCsv: (text) ->
-    console.log 'RENDER CSV'
-    console.log text
+    # console.log 'RENDER CSV'
+    # console.log text
 
     parsedCSV = d3.csvParseRows(text)
-    container = d3.select('.drift-content')
+    container = d3.select('.csv-viewer')
     .append('table')
     .selectAll('tr')
     .data(parsedCSV)

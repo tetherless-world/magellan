@@ -1,0 +1,22 @@
+include ../../../../base/partials/form_helpers
+
+.col-lg-3
+
+  .row
+    .col-lg-12(data-region='ontology-selector')
+
+  .row
+    .col-lg-12
+      +formInput({ label: 'Enabled', type: 'checkbox', name: 'enabled' })
+      +formInput({ label: 'References Node', type: 'checkbox', name: 'references_node' })
+
+  button.btn.btn-outline-primary.w-100.mb-2( data-click='add' )
+    i.fa.fa-fw.fa-plus-circle
+    | &nbsp;
+    | Add Definition
+
+.col-lg-9(data-region='definitions')
+
+.col-lg-12
+  +cancelButton({})
+  +submitButton({})

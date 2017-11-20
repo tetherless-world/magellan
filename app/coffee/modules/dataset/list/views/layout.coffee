@@ -1,7 +1,3 @@
-# TODO - abstract into separate library
-LdViewer = require '../../../search/facetsearch/views/graph.coffee'
-
-# # # # #
 
 class DatasetEmpty extends Mn.LayoutView
   template: require './templates/dataset_empty'
@@ -30,7 +26,7 @@ class DatasetList extends Mn.CompositeView
 # # # # #
 
 class DatasetShow extends Mn.LayoutView
-  className: 'card card-block'
+  className: 'card card-body'
   template: require './templates/dataset_show'
 
 # # # # #

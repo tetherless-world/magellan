@@ -1,0 +1,23 @@
+include ../../../../base/partials/form_helpers
+
+mixin typeSelector(opts)
+  button.btn.btn-outline-secondary( data-click='type-selector' data-type=opts.type )
+    i.fa.fa-fw( class=opts.icon )
+    | &nbsp;
+    | #{opts.text}
+
+//- .col-lg-12
+//-   p.lead New Knowledge Rule
+
+.col-lg-12
+  .alert.alert-primary
+    strong New Knowledge Rule
+    br
+    | Select a Knowledge Rule type.
+
+.col-lg-12
+  +typeSelector({ type: 'definer',    icon: 'fa-plus-square-o', text: 'Definer' })
+  +typeSelector({ type: 'decorator',  icon: 'fa-magic',         text: 'Decorator' })
+
+.col-lg-12.m-t-2
+  +cancelButton({})

@@ -1,0 +1,31 @@
+include ../../../../base/partials/form_helpers
+
+.col-lg-12
+  .card.card-body
+
+    .row
+
+      .col-lg-12
+        p.lead.mb-0
+          if isNew
+            | New Definition
+          else
+            | Edit Definition
+
+      .col-lg-12
+        hr
+
+      .col-lg-12( data-region='constraint' )
+
+      .col-lg-12
+        hr
+
+      .col-lg-12( data-region='action' )
+
+      .col-lg-12
+        hr
+
+      //- TODO - these buttons should be custom-made for this particular form
+      .col-lg-12.text-right
+        +cancelButton({})
+        +submitButton({})

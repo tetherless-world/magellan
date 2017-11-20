@@ -1,5 +1,5 @@
 ## Magellan
-#### Ontology-driven Lightweight Faceted Browser
+#### Ontology-driven Lightweight Faceted Browser & Knowledge Capture Utility
 
 ##Built with:
 

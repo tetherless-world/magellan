@@ -1,0 +1,61 @@
+
+//- First
+if currentPage != 1
+  li.page-item
+    a.page-link.cursor-pointer( data-click='first' )
+      i.fa.fa-angle-double-left
+
+else
+  li.page-item.disabled
+    a.page-link
+      i.fa.fa-angle-double-left
+
+//- Prev
+if currentPage - 1 > 0
+  li.page-item
+    a.page-link.cursor-pointer( data-click='prev' )
+      i.fa.fa-angle-left
+
+else
+  li.page-item.disabled
+    a.page-link
+      i.fa.fa-angle-left
+
+//- Pages
+if !empty
+  each page in shown
+
+    if page == '...'
+      li.page-item
+        a.page-link.disabled ...
+
+    else
+      if page == currentPage
+        li.page-item.active
+          a.page-link= page
+
+      else
+        li.page-item
+          a.page-link.cursor-pointer( data-click='page' data-page=page )= page
+
+//- Next
+if currentPage < totalPages
+  li.page-item
+    a.page-link.cursor-pointer( data-click='next' )
+      i.fa.fa-angle-right
+
+else
+  li.page-item.disabled
+    a.page-link
+      i.fa.fa-angle-right
+
+//- Last
+if currentPage != totalPages
+  li.page-item
+    a.page-link.cursor-pointer( data-click='last' )
+      i.fa.fa-angle-double-right
+
+else
+  li.page-item.disabled
+    a.page-link
+      i.fa.fa-angle-double-right

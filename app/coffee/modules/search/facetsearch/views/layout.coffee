@@ -1,5 +1,6 @@
 require './engine'
-RecordListView = require './recordList'
+RecordList = require './recordList'
+RecordListLayout = require './recordListLayout'
 DetailView = require './itemDetail'
 HeaderView = require './header'
 
@@ -25,21 +26,48 @@ class FacetedViewLayout extends Mn.LayoutView
     # Shows HeaderView
     # TODO - rename to ControlsView / @controlsRegion
     headerView = new HeaderView({ model: @model })
+
+    # Clear Filters
     headerView.on 'clear', => jQuery.clearFacets()
+
+    # View Records as List or Viewer
+    headerView.on 'list', @showRecordList
+    headerView.on 'viewer', @showRecordListLayout
+
+    # Shows the HeaderView in the headerRegion
     @headerRegion.show headerView
 
     # Initializes FacetView
     setTimeout(@initFacetView, 100)
 
     # Bypass List selector
-    listView = new RecordListView({ collection: @collection })
-    listView.on 'childview:show:relation', (view, uri) => @showItem(uri)
+    # @showRecordListLayout()
+    @showRecordList()
+
+  showRecordList: =>
+    listView = new RecordList({ collection: @collection })
+    listView.on 'childview:show:relation', (view, id) => @showItem(id)
+    # listView.on 'show:underlay', => @$('.drift-underlay').addClass('active')
+    # listView.on 'hide:underlay', => @$('.drift-underlay').removeClass('active')
     @listRegion.show listView
 
-  showItem: (uri) =>
+  showRecordListLayout: =>
+    listView = new RecordListLayout({ collection: @collection })
+    listView.on 'childview:show:relation', (view, id) => @showItem(id)
+    @listRegion.show listView
 
-    # Gets item from collection
-    item = @options.items.get(uri)
+  showItem: (id) =>
+
+    # Empty variable to store found item
+    item = null
+
+    # Finds item
+    for el in @options.items.models
+      if el.get('data')['@id'] == id
+        item = el
+        break
+
+    # Short circuits if item isn't defined
     return unless item
 
     # Closes, if @detailView is showing the same model
@@ -72,23 +100,28 @@ class FacetedViewLayout extends Mn.LayoutView
 
   initFacetView: =>
 
+    # Isolates facet data
+    facets = @options.facetCollection.getEnabled()
+
+    # Generates orderByOptions
+    orderByOptions = {}
+    orderByOptions[f.attribute] = f.label for f in facets
+
     settings =
       items: @options.items.toJSON()
-      facets: @options.facetCollection.getEnabled()
+      facets: facets
       resultElement: '#results'
       facetElement:  '#facets'
       resultTemplate: 'placeholder'
-      resultTemplateBypass: (item) => @collection.add(item)
-      beforeResultRender: => @collection.reset([])
+      resultTemplateBypass: (item) => @collection.add(item) # TODO - PERFORMANCE
+      beforeResultRender: => @collection.reset([])          # TODO - PERFORMANCE
 
       # TODO - implement pagination
-      # paginationCount: 50
+      paginationCount: 50
 
       # TODO - adjust ordering of elements
-      # TODO - abstract into OrderModel, Settings Model??
-      orderByOptions:
-        'dmo:type':   'DMO Type'
-        'label':      'Label'
+      # TODO - this is broken and it must be re-worked.
+      orderByOptions: orderByOptions
 
       # TODO - this should be implemented..
       # TODO - what does this do????

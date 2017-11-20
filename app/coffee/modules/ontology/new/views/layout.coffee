@@ -35,7 +35,7 @@ class UploadWidget extends Mn.LayoutView
 # TODO - most of this is repeated directly from the new dataset form
 class NewOntologyLayout extends Mn.LayoutView
   template: require './templates/layout'
-  className: 'container-fluid'
+  className: 'container'
 
   behaviors:
     SubmitButton: {}
@@ -56,7 +56,8 @@ class NewOntologyLayout extends Mn.LayoutView
     @enableSubmit()
 
   onSubmit: ->
-    data = Backbone.Syphon.serialize(@)
+    data    = Backbone.Syphon.serialize(@)
+    data.id = buildUniqueId('on_')
     @model.set(data)
     @saveToDexie()
 

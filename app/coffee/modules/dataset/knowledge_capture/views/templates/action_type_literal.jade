@@ -1,0 +1,15 @@
+include ../../../../base/partials/form_helpers
+
+.col-lg-12
+
+  input(type='hidden', name='action', value='static')
+
+  .alert.alert-primary
+    i.fa.fa-fw.fa-quote-right
+    | &nbsp;
+    strong Literal
+    br
+    | Assigns the supplied literal text to the rule's target property.
+
+.col-lg-12
+  +formInput({ label: 'Literal Text', placeholder: 'Literal Text', name: 'literal_text', type: 'text' })

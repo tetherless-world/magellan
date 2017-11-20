@@ -1,0 +1,94 @@
+.col-lg-12
+  .card.card-body
+
+    .row
+
+      .col-lg-6
+        p.lead.mb-0 Definition
+
+      .col-lg-6.text-right
+        button.btn.btn-sm.btn-outline-secondary.mr-2( data-click='edit' )
+          i.fa.fa-fw.fa-pencil
+          | &nbsp;
+          | Edit
+
+        button.btn.btn-sm.btn-outline-danger( data-click='discard' )
+          i.fa.fa-fw.fa-trash
+          | &nbsp;
+          | Discard
+
+      .col-lg-12
+        hr
+
+      .col-lg-12
+
+        //- Constraint
+        .row
+          .col-lg-12
+            p.lead Constraint
+
+          .col-lg-4
+            strong Source
+          .col-lg-4
+            strong Operation
+          .col-lg-4
+            strong Value
+
+          .col-lg-4= source
+          .col-lg-4= operation
+          .col-lg-4= value
+
+        .row
+          .col-lg-12
+            hr
+
+        //- Action
+        //- TODO - needs action_type_viewer - separate view and region
+        //- Or a series of partials to conditionally render the correct template
+        .row
+          .col-lg-12
+            p.lead Action
+
+          if action == 'literal'
+
+            .col-lg-6
+              strong Action Type
+            .col-lg-6
+              strong Literal Text
+
+            .col-lg-6 Literal
+            .col-lg-6= literal_text
+
+          if action == 'filter'
+
+            .col-lg-12
+              strong Action Type
+            .col-lg-12 Filter
+
+          if action == 'clone'
+
+            .col-lg-6
+              strong Action Type
+            .col-lg-6
+              strong Clone From
+
+            .col-lg-6 Clone
+            .col-lg-6= clone_source
+
+          if action == 'replace'
+
+            .col-lg-6
+              strong Action Type
+            .col-lg-6
+              strong Text Source
+
+            .col-lg-6 Replace
+            .col-lg-6= replace_source
+
+            .col-lg-12
+              strong Text to Replace
+            .col-lg-12= replace_text
+
+            .col-lg-12
+              strong Replace With
+            .col-lg-12= replace_with

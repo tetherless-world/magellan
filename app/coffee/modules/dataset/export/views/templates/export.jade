@@ -1,0 +1,35 @@
+include ../../../../base/partials/form_helpers
+
+.row.d-flex.w-100.flex-column
+  .col-lg-12
+
+    .card.card-body
+      .row
+        .col-lg-12
+          p.lead Export
+
+        .col-lg-12
+          .alert.alert-primary
+            i.fa.fa-fw.fa-question-circle
+            | &nbsp;
+            | This action exports the dataset with Knowledge Capture.
+
+      .row
+        .col-lg-6
+          button.btn.btn-outline-success.w-100( data-export='json' )
+            i.fa.fa-fw.fa-file-code-o
+            | &nbsp;
+            | JSON Export
+
+        .col-lg-6
+          button.btn.btn-outline-success.w-100( data-export='csv' )
+            i.fa.fa-fw.fa-file-excel-o
+            | &nbsp;
+            | CSV Archive
+
+      .row.mt-3
+        .col-lg-12
+          button.btn.btn-outline-success.w-100( data-export='enhanced' )
+            i.fa.fa-fw.fa-file-code-o
+            | &nbsp;
+            | Knowledge Enhanced JSON

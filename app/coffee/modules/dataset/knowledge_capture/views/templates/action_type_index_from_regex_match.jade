@@ -1,0 +1,21 @@
+include ../../../../base/partials/form_helpers
+
+.col-lg-12
+
+  input(type='hidden', name='action', value='index_from_regex_match')
+
+  .alert.alert-primary
+    i.fa.fa-fw.fa-registered
+    | &nbsp;
+    strong Index From Regex Match
+    br
+    | Matches a pattern and returns the index from the match group.
+
+.col-lg-4
+  +formSelect({ label: 'Source', name: 'index_from_regex_match_source', options: sourceOptions })
+
+.col-lg-4
+  +formInput({ label: 'Regular Expression', placeholder: 'Regular Expression', name: 'index_from_regex_match_regex', type: 'text' })
+
+.col-lg-4
+  +formInput({ label: 'Index', placeholder: 'Index', name: 'index_from_regex_match_index', type: 'text' })

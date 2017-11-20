@@ -1,0 +1,17 @@
+
+// Select2 Core styles & overrides
+@import 'node_modules/select2/src/scss/core'
+
+// Select2 Overrides
+// FEATURE - this should be broken out into a Select2 Theme?
+.select2.select2-container
+  height: 2.5rem
+  .select2-selection
+    height: 2.5rem
+    border-radius: 0
+
+    .select2-selection__rendered, .select2-selection__arrow
+      margin-top: 0.25rem
+
+    .select2-selection__clear
+      display: none

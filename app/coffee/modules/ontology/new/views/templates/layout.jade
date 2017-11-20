@@ -1,15 +1,26 @@
 include ../../../../base/partials/form_helpers
 
 .row
-  .col-xs-6
-    +formInput({ label: 'ID', placeholder: 'ID', name: 'id', type: 'text' })
 
-  .col-xs-6(data-region='upload')
+  .col-lg-12
 
-  .col-xs-12
-    +submitButton({})
+    .card.card-body
 
-  //- .col-xs-6= id
-  //- .col-xs-12= label
-  //- .col-xs-12= tooltip
-  //- .col-xs-12= prefix
+      .row
+        .col-lg-12
+          h4.card-title New Ontology
+
+        .col-lg-12
+          hr
+
+        .col-lg-12
+          +formInput({ label: 'Label', placeholder: 'Label', name: 'label', type: 'text' })
+          +formInput({ label: 'Prefix', placeholder: 'Prefix', name: 'prefix', type: 'text' })
+
+        .col-lg-12(data-region='upload')
+
+        .col-lg-12
+          hr
+
+        .col-lg-12.text-right
+          +submitButton({})

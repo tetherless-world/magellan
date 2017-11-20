@@ -3,14 +3,14 @@ html, body.window
   height: 100%
 
 $brdr-color: #ccc
-$sidebarTransition: margin-left .25s cubic-bezier(0,0,0,1.2)
 
 // TODO - Layout Styles should be included in their respective component repositories
 .flash-region
   position: fixed
   z-index: 1000
   width: 50%
-  right: 0
+  right: 1rem
+  bottom: 1rem
   margin-top: 7.5rem
 
 .header-region
@@ -25,13 +25,12 @@ $sidebarTransition: margin-left .25s cubic-bezier(0,0,0,1.2)
   position: fixed
   z-index: 90
   width: 100%
-  margin-top: 3.45rem
+  margin-top: 4rem
   border-bottom: 1px solid $brdr-color
-  transition: $sidebarTransition
 
 .main-region
   transition: opacity 0.25s ease-in-out
-  padding-top: 7.5rem
+  padding-top: 8rem
 
 .overlay-region
   z-index: 0
@@ -49,37 +48,3 @@ $sidebarTransition: margin-left .25s cubic-bezier(0,0,0,1.2)
   &.active
     z-index: 80
     opacity: 0.60
-
-.sidebar-region
-  position: fixed
-  z-index: 100
-  width: 14rem
-  background: $body-bg
-  height: 200%
-  left: 0
-  margin-left: -14rem
-  margin-top: 3.5rem
-  border-right: 1px solid $brdr-color
-  transition: $sidebarTransition
-
-  a.nav-link.divider
-    padding: 0.2rem 1rem
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-
-// // // //
-
-body.window.sidebar-active
-
-  .sidebar-region
-    margin-left: 0rem
-
-  .breadcrumb-region
-    margin-left: 14rem
-
-  .overlay-region
-    z-index: 80
-    opacity: 0.60
-    pointer-events: all
-
-  .main-region
-    filter: blur(10px)

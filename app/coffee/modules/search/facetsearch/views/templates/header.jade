@@ -1,13 +1,29 @@
 .row
-  .col-xs-6.text-xs-left
-    a.btn.btn-secondary( data-click='clear')
+  .col-lg-6.text-xs-left
+    a.btn.btn-outline-secondary( data-click='clear')
       i.fa.fa-fw.fa-times-circle-o
       | &nbsp;
       | Clear Filters
 
-  .col-xs-6.text-xs-right
-    .btn-group
-      a.btn.btn-primary-outline( href="#datasets/#{id}/settings" data-click='settings')
-        i.fa.fa-fw.fa-cog
-        | &nbsp;
-        | Settings
+  .col-lg-6.text-right
+
+    //- .btn-group.mr-2
+    //-   button.btn.btn-outline-secondary( data-click='list' )
+    //-     i.fa.fa-fw.fa-list
+    //-     | &nbsp;
+    //-     | List View
+
+    //-   button.btn.btn-outline-secondary( data-click='viewer' )
+    //-     i.fa.fa-fw.fa-list-alt
+    //-     | &nbsp;
+    //-     | Detail View
+
+    a.btn.btn-outline-primary.mr-2( href="#datasets/#{id}/capture" )
+      i.fa.fa-fw.fa-paperclip
+      | &nbsp;
+      | Knowledge Capture
+
+    a.btn.btn-outline-secondary( href="#datasets/#{id}/config" )
+      i.fa.fa-fw.fa-cog
+      | &nbsp;
+      | Configuration

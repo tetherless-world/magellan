@@ -1,0 +1,32 @@
+.row
+  .col-lg-12
+
+    h4.card-title
+      if icon
+        i.fa.fa-fw(class=icon)
+        | &nbsp;
+      a.cursor-pointer(data-relation=data['@id'])= data['@id']
+
+  //- .col-lg-3.text-right
+  //-   .btn.btn-outline-secondary.btn-sm(data-toggle='tooltip', data-placement='left', title='Copy JSON to Clipboard', data-click='clipboard' style='line-height=0;')
+  //-     i.fa.fa-files-o
+
+//-
+//- if views.img
+//-   .row
+//-     .col-lg-12.text-center
+//-       img.img-thumbnail(data-zoom=views.img, src=views.img, style='max-height:40rem;')
+
+//- if views.audio
+//-   a.btn.btn-outline-primary(href=views.audio, target='_blank')
+//-     i.fa.fa-fw.fa-file-audio-o
+//-     | &nbsp;
+//-     | Listen
+
+//- if views.video
+//-   video(width='320', height='240', controls='')
+//-     source(src=views.video, type='video/mp4')
+//-     | Your browser does not support the video tag.
+
+.row
+  .col-lg-12(data-region='viewer')

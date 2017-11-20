@@ -13,17 +13,39 @@ class Application extends Marionette.Service
     # Starts Header Component
     Backbone.Radio.channel('header').trigger('reset')
 
+    # Starts Loading Component
+    Backbone.Radio.channel('loading').trigger('ready')
+
     # Starts Henson.js Components
     Backbone.Radio.channel('breadcrumb').trigger('ready')
     Backbone.Radio.channel('overlay').trigger('ready')
     return true
 
   # Starts the application
-  # Starts Backbone.history (enables routing)
-  # And initializes sidebar module
+  # Populates the database with the bundled ontologies,
+  # starts Backbone.history (enables routing), and initializes sidebar module
   onReady: ->
-    Backbone.history.start()
-    Backbone.Radio.channel('sidebar').trigger('reset')
+
+    # Populates DexieDB with default ontologies
+    Backbone.Radio.channel('ontology').request('ensure:bundled').then () =>
+
+      # TODO - Populate DexieDB with default datasets
+
+      # Hides loading message
+      Backbone.Radio.channel('loading').trigger('hide')
+
+      # Starts Backbone.History
+      Backbone.history.start()
+
+      # Prevents non-chrome browsers from using the tool
+      if !window.chrome
+        Backbone.Radio.channel('unsupported').trigger('show')
+
+    .catch (err) =>
+
+      # TODO - this needs a graceful fallback
+      console.log 'ERROR FETCHING ONTOLOGIES'
+      console.log err
 
   # Redirection interface
   # Used accross the application to redirect

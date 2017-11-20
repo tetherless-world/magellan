@@ -1,0 +1,13 @@
+.col-lg-12.text-center
+  .alert.alert-dismissible( role='alert' class="alert-" + context )
+
+    if dismissible
+      button.close( type='button' data-click='dismiss' aria-label='Close' )
+        span( aria-hidden='true' ) ×
+        span.sr-only Close
+
+    if strong
+      strong= strong + " "
+
+    if message
+      = message

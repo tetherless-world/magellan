@@ -1,0 +1,20 @@
+include ../../../../base/partials/form_helpers
+
+.row
+  .col-lg-12
+    .card.card-body
+      .row
+        .col-lg-12
+          h4.card-title Edit Dataset
+
+        .col-lg-12
+          hr
+
+        .col-lg-12
+          +formInput({ label: 'Label', placeholder: 'Label', name: 'label', type: 'text' })
+
+        .col-lg-12
+          hr
+
+        .col-lg-12.text-right
+          +submitButton({})

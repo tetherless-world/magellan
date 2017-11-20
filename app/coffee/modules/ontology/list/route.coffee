@@ -7,7 +7,8 @@ class OntologyListRoute extends require 'hn_routing/lib/route'
   title: 'Magellan - Ontologies'
 
   breadcrumbs: [
-    { text: 'Ontologies'}
+    { href: '#', text: 'Home' }
+    { text: 'Ontologies' }
   ]
 
   fetch: ->

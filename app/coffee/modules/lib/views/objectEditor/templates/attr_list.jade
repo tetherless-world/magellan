@@ -1,0 +1,14 @@
+include /cm_ui/views/partials/form_helpers
+
+.col-lg-12
+  ul.list-group.list-group-table.list-group-table-sm
+    li.list-group-item.list-group-table-head
+      +button({ icon: 'fa-plus', text: 'Add' })(class='btn-primary btn-sm' data-click='add')
+
+      if !disableSubmit
+        .pull-right
+          +submitButton({ text: 'Save' })(class='ml-2 btn-sm')
+          +cancelButton({})(class='ml-2 btn-sm')
+
+
+  ul.list-group.list-group-table.list-group-table-sm(data-container='editors')

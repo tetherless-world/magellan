@@ -1,22 +1,36 @@
 
+.ld__graph
+  overflow: scroll
+
 .nav.nav-tabs
   .nav-link
     padding: 0.25rem 0.5rem
 
+// body::-webkit-scrollbar
+//   width: 0
+
 // FacetSearch Styles
 .facetsearch
   @extend .card
-  @extend .card-inverse
+  // @extend .card-inverse
+  margin-bottom: 0.5rem
 
   // Active
   &.active
     h3.facettitle
+      border-bottom: 2px solid #dddddd
+      z-index: 10
       i.icon
         @extend .fa-chevron-down
 
+    .facetlist::-webkit-scrollbar
+      width: .5rem
+
     .facetlist
+      max-height: 18rem
+      overflow-y: scroll
       .facetitem
-        display: inherit
+        display: block
 
   // Non-active
   .facettitle
@@ -27,21 +41,8 @@
 
     span.prefix
       display: none
-      @extend .label
       float: right
       margin-right: 1rem
-
-      &.dmo
-        @extend .label-default
-
-      &.dmoi
-        @extend .label-success
-
-      &.dmoa
-        @extend .label-primary
-
-      &.ore
-        @extend .label-warning
 
     i.help
       @extend .fa-question-circle-o
@@ -69,24 +70,29 @@
         float: right
 
       &.no-match
+        // TODO - remove display: none; here
+        // display: none;
         cursor: not-allowed
         background-color: #f3f3f3
         font-style: italic
 
       &.activefacet
         background-color: #dff0d8 !important
-        // @extend .list-group-item-success
-        display: inherit
+        @extend .list-group-item-success
+        display: block
 
 .bottomline
   @extend .card
-  @extend .card-block
+  @extend .card-body
 
 // Result List
 .list-group.record-list-group
   .list-group-item
-    &:nth-child(odd)
-      background-color: lighten($list-group-hover-bg, 2%)
+    &.active
+      z-index: 0 !important
+    &:not(.active)
+      &:nth-child(odd)
+        background-color: lighten($list-group-hover-bg, 2%)
 
     h4.card-title
       font-size: 1rem

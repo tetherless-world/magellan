@@ -1,0 +1,28 @@
+include ../../../../base/partials/form_helpers
+
+.col-lg-12
+  .alert.alert-primary
+    p.lead.mb-0
+      i.fa.fa-fw.fa-code
+      | &nbsp;
+      | JSON-LD
+
+    p.lead.mb-0 Imports an existing JSON-LD knowledge graph for processing by Magellan.
+
+.col-lg-12
+  +formInput({ label: 'Label', placeholder: 'Label', name: 'label', type: 'text' })
+
+.col-lg-12(data-region='upload')
+
+.col-lg-12
+  hr
+
+.col-lg-12.text-right
+
+  a.btn.btn-outline-secondary.mr-2( href='#datasets' )
+    i.fa.fa-fw.fa-times
+    | &nbsp;
+    | Cancel
+
+  +submitButton({})
+

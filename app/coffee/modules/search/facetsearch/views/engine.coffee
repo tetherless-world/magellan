@@ -9,19 +9,10 @@
 defaults =
   items: [{a:2,b:1,c:2},{a:2,b:2,c:1},{a:1,b:1,c:1},{a:3,b:3,c:1}],
   facets: {'a': 'Title A', 'b': 'Title B', 'c': 'Title C'},
-  resultElement: '#results'
   facetElement: '#facets'
-  facetContainer: '<div class=facetsearch id=<%= id %> ></div>'
-  facetTitleTemplate: '<h3 class=facettitle><i class="icon"></i><%= title %><i class="fa fa-fw help" data-toggle="tooltip" data-placement="right" title="<%= tooltip %>"></i><br><span class="prefix <%= prefix %>"><%= prefix %> : <%= _id %></span></h3>'
-  facetListContainer: '<div class=facetlist></div>'
   listItemTemplate: '<div class="facetitem" id="<%= id %>"><%= name %> <span class="facetitemcount">(<%= count %>)</span></div>'
-  bottomContainer: '<div class=bottomline></div>'
-  orderByTemplate: '<div class=orderby><span class="orderby-title">Sort by: </span><ul><% _.each(options, function(value, key) { %>' + '<li class=orderbyitem id=orderby_<%= key %>>' + '<%= value %> </li> <% }); %></ul></div>'
   countTemplate: '<div class=facettotalcount>Results</div>'
-  deselectTemplate: '<div class=deselectstartover>Deselect all filters</div>'
-  resultTemplate: '<div class=facetresultbox><%= name %></div>'
   resultTemplateBypass: null
-  noResults: '<div class=results>Sorry, but no items match these criteria</div>'
   orderByOptions:
     'a': 'by A'
     'b': 'by B'
@@ -29,7 +20,6 @@ defaults =
   state:
     orderBy: false
     filters: {}
-  showMoreTemplate: '<a id=showmorebutton>Show more</a>'
   enablePagination: true
   paginationCount: 20
 
@@ -54,7 +44,7 @@ settings = {}
 # TODO - this can be phased out once facetCollection IS a Backbone.Collection
 createEmptyFacetCollection = ->
   for facet in settings.facets
-    settings.facetCollection[facet.id] = {}
+    settings.facetCollection[facet.attribute] = {}
 
 # Sets zero count for all settings.items?
 # TODO - rename settings.items
@@ -63,34 +53,41 @@ setZeroCounts = ->
   # Iterate over each item
   for item in settings.items
 
+    # Aliases item
+    item = item.data
+
     # intialize the count to be zero
     for facet in settings.facets
 
       # Item[facet] is an array...
-      if $.isArray(item[facet.id])
+      if $.isArray(item[facet.attribute])
 
-        for facetitem in item[facet.id]
+        for facetitem in item[facet.attribute]
 
           if typeof facetitem == 'object'
-            settings.facetCollection[facet.id][facetitem['@id']] = settings.facetCollection[facet.id][facetitem['@id']] ||
+            settings.facetCollection[facet.attribute][facetitem['@id']] = settings.facetCollection[facet.attribute][facetitem['@id']] ||
               count: 0
               id: _.uniqueId('facet_')
 
           else
-            settings.facetCollection[facet.id][facetitem] = settings.facetCollection[facet.id][facetitem] or
+            settings.facetCollection[facet.attribute][facetitem] = settings.facetCollection[facet.attribute][facetitem] or
               count: 0
               id: _.uniqueId('facet_')
 
       # IF OBJECT OR @ID
-      else if typeof(item[facet.id]) == 'object' && item[facet.id]['@id']
-        settings.facetCollection[facet.id][item[facet.id]['@id']] = settings.facetCollection[facet.id][item[facet.id]['@id']] ||
+      else if typeof(item[facet.attribute]) == 'object' && (item[facet.attribute]['@id'] || item[facet.attribute]['@value'])
+
+        # Sets attrKey
+        attrKey = if item[facet.attribute]['@id'] then '@id' else '@value'
+
+        settings.facetCollection[facet.attribute][item[facet.attribute][attrKey]] = settings.facetCollection[facet.attribute][item[facet.attribute][attrKey]] ||
           count: 0
           id: _.uniqueId('facet_')
 
       # Not an array or object...
       else
-        if item[facet.id] != undefined
-          settings.facetCollection[facet.id][item[facet.id]] = settings.facetCollection[facet.id][item[facet.id]] or
+        if item[facet.attribute] != undefined
+          settings.facetCollection[facet.attribute][item[facet.attribute]] = settings.facetCollection[facet.attribute][item[facet.attribute]] or
             count: 0
             id: _.uniqueId('facet_')
 
@@ -142,8 +139,11 @@ resetFacetCount = ->
 filterSingleItem = (item) ->
   # Bool for _.select / _.filter
   filtersApply = true
-  # Iterates over each filter
 
+  # Aliases item.data
+  item = item.data
+
+  # Iterates over each filter
   for facet, filter of settings.state.filters
 
     # TODO - abstract this elsewhere, repeated
@@ -161,8 +161,12 @@ filterSingleItem = (item) ->
         if inters.length == 0
           filtersApply = false
 
-    else if typeof(item[facet]) == 'object' && item[facet]['@id']
-      if filter.length and _.indexOf(filter, item[facet]['@id']) == -1
+    else if typeof(item[facet]) == 'object' && (item[facet]['@id'] || item[facet]['@value'])
+
+      # Sets attrKey
+      attrKey = if item[facet]['@id'] then '@id' else '@value'
+
+      if filter.length and _.indexOf(filter, item[facet][attrKey]) == -1
         filtersApply = false
 
     else
@@ -189,25 +193,30 @@ updateFacetCollection = ->
 
     for item in settings.currentResults
 
+      item = item.data
+
       # TODO - abstract this logic elswhere
       # TODO - document what's happening here...
-      if $.isArray(item[facet.id])
-        _.each item[facet.id], (facetitem) ->
+      if $.isArray(item[facet.attribute])
+        _.each item[facet.attribute], (facetitem) ->
 
           if typeof(facetitem) == 'object'
-            settings.facetCollection[facet.id][facetitem['@id']].count += 1
+            settings.facetCollection[facet.attribute][facetitem['@id']].count += 1
 
           else
-            settings.facetCollection[facet.id][facetitem].count += 1
+            settings.facetCollection[facet.attribute][facetitem].count += 1
             return
 
-      else if typeof(item[facet.id]) == 'object' && item[facet.id]['@id']
-        if item[facet.id]['@id'] != undefined
-          settings.facetCollection[facet.id][item[facet.id]['@id']].count += 1
+      else if typeof(item[facet.attribute]) == 'object' && (item[facet.attribute]['@id'] || item[facet.attribute]['@value'])
+
+        attrKey = if item[facet.attribute]['@id'] then '@id' else '@value'
+
+        if item[facet.attribute][attrKey] != undefined
+          settings.facetCollection[facet.attribute][item[facet.attribute][attrKey]].count += 1
 
       else
-        if item[facet.id] != undefined
-          settings.facetCollection[facet.id][item[facet.id]].count += 1
+        if item[facet.attribute] != undefined
+          settings.facetCollection[facet.attribute][item[facet.attribute]].count += 1
 
 # # # # #
 
@@ -280,15 +289,21 @@ toggleFilter = (key, value) ->
 
 createFacetUI = ->
 
+  facetContainer = '<div class=facetsearch id=<%= id %> ></div>'
+  facetTitleTemplate = '<h3 class=facettitle><i class="icon"></i><%= title %><i class="fa fa-fw help" data-toggle="tooltip" data-placement="right" title="<%= tooltip %>"></i><br><span class="prefix <%= prefix %>"><%= prefix %> : <%= _id %></span></h3>'
+  facetListContainer = '<div class=facetlist></div>'
+
   # Templates & HTML setup
   itemtemplate = _.template(settings.listItemTemplate)
-  titletemplate = _.template(settings.facetTitleTemplate)
-  containertemplate = _.template(settings.facetContainer)
+  titletemplate = _.template(facetTitleTemplate)
+  containertemplate = _.template(facetContainer)
   $(settings.facetElement).html('')
 
   # Iterates over each setting...
+  # TODO - this will be replaced by the FACET_GROUP_COLLECTION_VIEW
+  # Each facet will have pagination, filtering, etc.
   for facet in settings.facets
-    facetHtml = $(containertemplate(id: facet.id))
+    facetHtml = $(containertemplate(id: facet.attribute))
 
     # Assembles facetItem
     facetItem =
@@ -297,12 +312,18 @@ createFacetUI = ->
       prefix:   facet.prefix
       _id:      facet._id
 
+    # ABSTRACTION
+    # This is where we should collect the GROUPS of facets
+    # This MAY be accessible outside this little engine, passed in as settings.facets
+    # console.log(facetItem);
+
     facetItemHtml = $(titletemplate(facetItem))
     facetHtml.append facetItemHtml
-    facetlist = $(settings.facetListContainer)
+    facetlist = $(facetListContainer)
 
     # Iterates over each filter
-    _.each settings.facetCollection[facet.id], (filter, filtername) ->
+    # TODO - this will be replaced by the FACET_ITEM_COLLECTION_VIEW
+    _.each settings.facetCollection[facet.attribute], (filter, filtername) ->
 
       # Splits name, handles directories ending with '/'
       # TODO - abstract into function
@@ -315,10 +336,13 @@ createFacetUI = ->
         name: filtername
         count: filter.count
 
+      # ABSTRACTION - this is where the INITIAL facets are populated into the UI
+      # FROM HERE, we start the collection of facet items
+      # console.log(item);
 
       # Facet filter item CSS state
       filteritem = $(itemtemplate(item))
-      if _.indexOf(settings.state.filters[facet.id], filtername) >= 0
+      if _.indexOf(settings.state.filters[facet.attribute], filtername) >= 0
         filteritem.addClass('activefacet')
 
       if item.count == 0
@@ -349,14 +373,22 @@ createFacetUI = ->
     updateResults()
     return
 
+  # # # # #
+
+  # TODO - ABSTRACT INTO SEPARATE VIEW
+  # FOR RESULT COUNTR AND ORDER CONTROLS
   # Append total result count
-  bottom = $(settings.bottomContainer)
+  bottomContainer = '<div class=bottomline></div>'
+  bottom = $(bottomContainer)
   countHtml = _.template(settings.countTemplate, count: settings.currentResults.length or 0)
   $(bottom).append(countHtml)
 
 
   # generate the "order by" options:
-  ordertemplate = _.template(settings.orderByTemplate)
+
+  orderByTemplate = '<div class=orderby><span class="orderby-title">Sort by: </span><ul><% _.each(options, function(value, key) { %>' + '<li class=orderbyitem id=orderby_<%= key %>>' + '<%= value %> </li> <% }); %></ul></div>'
+
+  ordertemplate = _.template(orderByTemplate)
   itemHtml = $(ordertemplate('options': settings.orderByOptions))
   $(bottom).append itemHtml
   $(settings.facetElement).append bottom
@@ -381,7 +413,8 @@ createFacetUI = ->
 
   # Append deselect filters button
   # TODO - abstract into Backbone.View
-  deselect = $(settings.deselectTemplate).click((event) ->
+  deselectTemplate = '<div class=deselectstartover>Deselect all filters</div>'
+  deselect = $(deselectTemplate).click((event) ->
     settings.state.filters = {}
     jQuery.facetUpdate()
     return
@@ -473,43 +506,46 @@ updateFacetUI = ->
 
 # TODO - abstract into Backbone.View
 updateResults = ->
-  $(settings.resultElement).html if settings.currentResults.length == 0 then settings.noResults else ''
+  noResults = '<div class=results>Sorry, but no items match these criteria</div>'
+  # $(settings.resultElement).html if settings.currentResults.length == 0 then noResults else ''
   showMoreResults()
   return
 
 showMoreResults = ->
   `var itemHtml`
+
   # ???
   showNowCount = if settings.enablePagination then Math.min(settings.currentResults.length - (settings.state.shownResults), settings.paginationCount) else settings.currentResults.length
   itemHtml = ''
+
   # TODO - remove
   if settings.beforeResultRender
     settings.beforeResultRender()
-  # Item Template (remove)
-  template = _.template(settings.resultTemplate)
+
+  # Iterates over each shown result
   i = settings.state.shownResults
   while i < settings.state.shownResults + showNowCount
 
     item = settings.currentResults[i]
+
     # item = $.extend(settings.currentResults[i],
     #   totalItemNr: i
     #   batchItemNr: i - (settings.state.shownResults)
     #   batchItemCount: showNowCount)
 
     if settings.resultTemplateBypass
-      settings.resultTemplateBypass item
-
-    else
-      itemHtml = itemHtml + template(item)
+      settings.resultTemplateBypass(item)
     i++
 
   # Appends itemHTML
-  $(settings.resultElement).append itemHtml
+  # $(settings.resultElement).append itemHtml
 
-  # Append MoreButton
+  # Append "MoreButton"
+  showMoreTemplate = '<a id=showmorebutton>Show more</a>'
+  # TODO - we will _probably_ paginate using BB.Mn
   # TODO - pagination
   # if !moreButton
-  #   moreButton = $(settings.showMoreTemplate).click(showMoreResults)
+  #   moreButton = $(showMoreTemplate).click(showMoreResults)
   #   $(settings.resultElement).after moreButton
   # # ???/
   # if settings.state.shownResults == 0

@@ -1,0 +1,17 @@
+if !dropdown
+  a.nav-link.cursor-pointer( href=href, class=linkCss, data-trigger=trigger )
+    if icon
+      i.fa.fa-fw( class=icon )
+      |&nbsp;
+    = text
+
+else
+  a.nav-link.cursor-pointer.dropdown-toggle( data-toggle='dropdown' )
+    if icon
+      i.fa.fa-fw( class=icon )
+      |&nbsp;
+    = text
+
+  .dropdown-menu.w-100
+    each item in dropdown
+      a.dropdown-item= item.text

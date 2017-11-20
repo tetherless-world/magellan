@@ -1,23 +1,63 @@
 .row
-  .col-xs-12
+  .col-lg-6
     h4.card-title= label
+
+  .col-lg-6.text-right
+
+    a.btn.btn-sm.btn-outline-secondary.mr-2(href="#datasets/#{id}")
+      i.fa.fa-fw.fa-eye
+      | &nbsp;
+      | Show
+
+    a.btn.btn-sm.btn-outline-secondary.mr-2(href="#datasets/#{id}/edit")
+      i.fa.fa-fw.fa-pencil
+      | &nbsp;
+      | Edit
+
+    a.btn.btn-sm.btn-outline-danger(href="#datasets/#{id}/destroy")
+      i.fa.fa-fw.fa-trash
+      | &nbsp;
+      | Destroy
+
+  .col-lg-12
     hr
 
 .row
-  .col-xs-6
+  .col-lg-12
+    p.lead #{_s.numberFormat(count)} Items
 
-    p.lead #{graph.length} Items
+.row
+  .col-lg-6
+    a.btn.btn-lg.btn-outline-primary.w-100(href="#datasets/#{id}/capture")
+      i.fa.fa-fw.fa-paperclip
+      | &nbsp;
+      | Knowledge Capture
 
-    a.btn.btn-primary-outline.w-100(href="#datasets/#{id}/search")
+  .col-lg-6
+    a.btn.btn-lg.btn-outline-success.w-100(href="#datasets/#{id}/search")
       i.fa.fa-fw.fa-search
       | &nbsp;
-      | Search Dataset
+      | Search
 
-  .col-xs-6
-    p.lead Context
-    ul.list-group
-      each ctx, prefix in context
-        li.list-group-item
-          strong= prefix
-          br
-          = ctx
+.row.mt-3
+  .col-lg-6
+    a.btn.btn-lg.btn-outline-dark.w-100(href="#datasets/#{id}/graph")
+      i.fa.fa-fw.fa-sitemap
+      | &nbsp;
+      | Graph
+
+  .col-lg-6
+    a.btn.btn-lg.btn-outline-success.w-100(href="#datasets/#{id}/export")
+      i.fa.fa-fw.fa-cloud-download
+      | &nbsp;
+      | Export
+
+  //- TODO - move to dataset show view
+  //- .col-lg-6
+  //-   p.lead Context
+  //-   ul.list-group
+  //-     each ctx, prefix in context
+  //-       li.list-group-item
+  //-         strong= prefix
+  //-         br
+  //-         = ctx

@@ -21,11 +21,11 @@ class ConfirmView extends Marionette.LayoutView
 
     denyIcon:     'fa-times'
     denyText:     'Cancel'
-    denyCss:      'btn-secondary'
+    denyCss:      'btn-outline-secondary'
 
     confirmIcon:  'fa-check'
     confirmText:  'Confirm'
-    confirmCss:   'btn-success'
+    confirmCss:   'btn-outline-success'
 
   serializeData: ->
     return _.extend(@defaultOptions, @options)

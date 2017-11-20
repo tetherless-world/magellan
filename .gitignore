@@ -16,3 +16,6 @@ cache
 
 # Output directory
 build
+
+# Log Files
+*.log

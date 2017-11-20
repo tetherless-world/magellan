@@ -1,0 +1,8 @@
+.col-lg-12
+  .form-group
+    label Target Property
+    select.form-control(name='target_property', placeholder='Target Property' )
+      each group in dropdown
+        optgroup(label=group.label)
+          each item in group.items
+            option(value=item)= item

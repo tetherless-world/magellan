@@ -1,0 +1,15 @@
+include /cm_ui/views/partials/form_helpers
+include /cm_ui/views/modal/templates/modal_header
+
+.modal-body
+  .row
+    .col-lg6
+      +formInput({ label: 'Attribute Name', placeholder: 'Attribute Name', name: 'attr',  type: 'text' })
+
+    .col-lg6
+      - selectOptions = ['string', 'number', 'boolean', 'array', 'object']
+      +formSelect({ label: 'Type', name: 'type', options: selectOptions })
+
+.modal-footer
+  +cancelButton({})(data-dismiss='modal')
+  +submitButton({ text: 'Add' })

@@ -1,6 +1,4 @@
-
 SearchView = require '../../search/facetsearch/views/layout'
-ItemCollection = require '../../search/collection' # TODO - abstract into factory elsewhere
 
 # # # # #
 
@@ -11,13 +9,14 @@ class DatasetSearchRoute extends require 'hn_routing/lib/route'
 
   breadcrumbs: ->
     return [
-      { text: 'Datasets', href: '#datasets' }
-      { text: "#{@model.get('label')}" }
+      { text: 'Home', href: '#' }
+      { text: 'Archives', href: '#datasets' }
+      { text: "#{@model.get('label')}", href: "#datasets/#{@model.id}" }
+      { text: 'Search' }
     ]
 
-  # TODO - this needs to be cleaned up dramatically.
-  # DatasetModel.ensureFacets() should be done inside the view
-  # to gracefully load the collection in a non-blocking way
+  # TODO - this should be re-evaluated
+  # Datapoints, Facets, and Results can be loaded in a non-blocking way
   fetch: (id) ->
 
     # Gets the Dataset
@@ -28,23 +27,29 @@ class DatasetSearchRoute extends require 'hn_routing/lib/route'
         # Assigns dataset to @model
         @model = model
 
-        # Gets FacetCollection from Dataset
-        @model.ensureFacets().then (facetCollection) =>
-          @facetCollection = facetCollection
+        # Fetches datapoints contained within the dataset
+        @model.fetchDatapoints().then (datapoints) =>
 
-          # Gets all items for Faceted Search
-          # TODO - abstract into DataSet model?
-          @items = new ItemCollection(@model.get('graph'))
+          # Assigns @datapoints
+          @datapoints = datapoints
 
-          # Gets SearchResultCollection
-          Backbone.Radio.channel('search:result').request('collection')
-          .then (collection) => @collection = collection
+          # Gets FacetCollection from Dataset
+          @model.fetchFacets().then (facetCollection) =>
 
-          # Resolves outter promise
-          resolve()
+            # Assigns @facetCollection
+            @facetCollection = facetCollection
+
+            # Gets SearchResultCollection
+            Backbone.Radio.channel('search:result').request('collection').then (collection) =>
+
+              # Assigns @collection
+              @collection = collection
+
+              # Resolves outter promise
+              return resolve()
 
   render: ->
-    @container.show new SearchView({ model: @model, collection: @collection, items: @items, facetCollection: @facetCollection })
+    @container.show new SearchView({ model: @model, collection: @collection, items: @datapoints, facetCollection: @facetCollection })
 
 # # # # #
 

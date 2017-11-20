@@ -14,18 +14,14 @@ class RecordTable extends Mn.LayoutView
   aggregatesShown: false
   toggleAggregates: ->
     if @aggregatesShown
-      @ui.toggleAggregates.text('Show Aggregates')
+      @ui.toggleAggregates.text('Show Elements')
       @$('[data-toggle=aggregates]').hide()
       @aggregatesShown = false
 
     else
-      @ui.toggleAggregates.text('Hide Aggregates')
+      @ui.toggleAggregates.text('Hide Elements')
       @$('[data-toggle=aggregates]').show()
       @aggregatesShown = true
-
-  serializeData: ->
-    d = super
-    return { data: d }
 
 # # # # #
 

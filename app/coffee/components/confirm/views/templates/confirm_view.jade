@@ -1,5 +1,5 @@
 mixin confirmButton(opts)
-  button.btn.w-100( type='button', data-click=opts.click, class=opts.css )
+  button.btn.w-50( type='button', data-click=opts.click, class=opts.css )
     if opts.icon
       i.fa.fa-fw( class=opts.icon )
       |&nbsp;
@@ -8,13 +8,10 @@ mixin confirmButton(opts)
 //- // // // // //
 
 .modal-body
-  p.lead.m-b-0(class=messageCss) !{message}
+  p.lead.mb-0(class=messageCss) !{message}
 
 .modal-footer
-  .row
-    .col-xs-6
-      +confirmButton({ click: 'deny', css: denyCss, icon: denyIcon, text: denyText })
-
-    .col-xs-6
-      +confirmButton({ click: 'confirm', css: confirmCss, icon: confirmIcon, text: confirmText })
+  .w-100
+    +confirmButton({ click: 'deny', css: denyCss, icon: denyIcon, text: denyText })
+    +confirmButton({ click: 'confirm', css: confirmCss, icon: confirmIcon, text: confirmText })
 

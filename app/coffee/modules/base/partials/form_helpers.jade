@@ -23,7 +23,11 @@ mixin formSelect(opts)
     select.form-control.c-select( name=opts.name, multiple=opts.multiple )
       if opts.options
         each opt in opts.options
-          option= opt
+          if Array.isArray(opt)
+            option( value=opt[0] )= opt[1]
+
+          else
+            option= opt
 
 //- // // // // //
 
@@ -52,7 +56,7 @@ mixin submitButton(opts)
   unless opts.icon
     - opts.icon = 'fa-check'
 
-  +button(opts)(data-click='submit', class='btn-success')&attributes(attributes)
+  +button(opts)(data-click='submit', class='btn-outline-success')&attributes(attributes)
 
 //- // // // // //
 
@@ -63,4 +67,4 @@ mixin cancelButton(opts)
   unless opts.icon
     - opts.icon = 'fa-times'
 
-  +button(opts)(data-click='cancel', class='btn-secondary')&attributes(attributes)
+  +button(opts)(data-click='cancel', class='btn-outline-secondary')&attributes(attributes)
