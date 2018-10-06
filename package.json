@@ -62,7 +62,7 @@
     "jsonld": "^0.4.11",
     "jsonld-vis": "^1.0.1",
     "marionette-service": "~0.0",
-    "moment": "~2.10",
+    "moment": "~2.19",
     "nw-builder": "^3.2.0",
     "popper.js": "^1.12.5",
     "qs": "~6.0",

@@ -1,12 +1,12 @@
 # NodeWebKit package.json
 config =
-  name:       'Magellan_Data_Explorer'
+  name:       'Magellan'
   version:    '0.0.1'
   main:       'index.html'
   'node-main':  './server_js/server.js'
   # 'node-main':  './js/server.js'
   window:
-    title:      'Magellan - Data Explorer'
+    title:      'Magellan'
     icon:       './img/icon.png'
     toolbar:    true
     frame:      true

@@ -38,7 +38,7 @@ class DatasetCreator extends Backbone.Model
         attribute:  facet
         label:      facet
         order:      index
-        enabled:    if facet in ['@id'] then false else true
+        enabled:    if facet in ['@id', 'rdfs:label'] then false else true
         tooltip:    ''
 
       # Increments index
